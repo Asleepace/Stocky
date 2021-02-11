@@ -1,16 +1,16 @@
 
 declare module 'yahoo-stock-prices' {
 
+  export function getHistoricalPrices({ ...params }: YahooHistoricalParams): Promise<YahooHistoricalData>
   export function getCurrentData(symbol: string): Promise<YahoStockData>
   export function getCurrentPrice(symbol: string): Promise<number>
-  export function getHistoricalPrices({ ...params }: YahooHistoricalParams): Promise<void>
 
-  export interface YahoStockData {
-    currency: 'string'
+  export type YahoStockData = {
+    currency: string
     price: number
   }
 
-  export interface YahooHistoricalParams {
+  export type YahooHistoricalParams = {
     startMonth: Month
     startDay: Day
     startYear: Year
@@ -20,6 +20,16 @@ declare module 'yahoo-stock-prices' {
     ticker: string
     frequency: Frequency
     callback?: Function
+  }
+
+  export type YahooHistoricalData = {
+    date: number
+    open: number
+    high: number
+    low: number
+    cose: number
+    volume: number
+    adjclose: number
   }
 
   export type Frequency = "id" | "1wk" | "1mo"
